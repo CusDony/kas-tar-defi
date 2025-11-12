@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국 주식 데이터베이스 - 최종 리포트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .completion-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .stat-card p {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .content {
+            padding: 30px;
+        }
+        h2 {
+            color: #667eea;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            font-size: 1.8em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 0.95em;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .number {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-kospi { background: #e3f2fd; color: #1976d2; }
+        .badge-kosdaq { background: #f3e5f5; color: #7b1fa2; }
+        .badge-konex { background: #fff3e0; color: #e65100; }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .price-up { color: #dc2626; }
+        .price-down { color: #2563eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>한국 주식 데이터베이스</h1>
+            <p class="subtitle">전체 종목 일봉 데이터 수집 완료</p>
+            <div class="completion-badge">✓ 100% COMPLETED</div>
+            <p style="margin-top: 15px; font-size: 0.95em;">생성 시간: 2025-11-12 10:36:24</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>총 레코드 수</h3>
+                <p>5,667,841</p>
+            </div>
+            <div class="stat-card">
+                <h3>전체 종목</h3>
+                <p>2,876</p>
+            </div>
+            <div class="stat-card">
+                <h3>데이터 시작일</h3>
+                <p style="font-size: 1.5em;">2015-11-13</p>
+            </div>
+            <div class="stat-card">
+                <h3>최종 업데이트</h3>
+                <p style="font-size: 1.5em;">2025-11-07</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>최근 거래 데이터 (최신순 50개)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>티커</th>
+                        <th>회사명</th>
+                        <th>날짜</th>
+                        <th class="number">시가</th>
+                        <th class="number">고가</th>
+                        <th class="number">저가</th>
+                        <th class="number">종가</th>
+                        <th class="number">거래량</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td><strong>000020</strong></td>
+                        <td>동화약품</td>
+                        <td>2025-11-07</td>
+                        <td class="number">6,240.00</td>
+                        <td class="number">6,240.00</td>
+                        <td class="number">6,070.00</td>
+                        <td class="number">6,100.00</td>
+                        <td class="number">62,074</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000040</strong></td>
+                        <td>KR모터스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">454.00</td>
+                        <td class="number">483.00</td>
+                        <td class="number">454.00</td>
+                        <td class="number">477.00</td>
+                        <td class="number">132,789</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000050</strong></td>
+                        <td>경방</td>
+                        <td>2025-11-07</td>
+                        <td class="number">6,690.00</td>
+                        <td class="number">6,740.00</td>
+                        <td class="number">6,550.00</td>
+                        <td class="number">6,590.00</td>
+                        <td class="number">11,399</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000070</strong></td>
+                        <td>삼양홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0.00</td>
+                        <td class="number">0.00</td>
+                        <td class="number">0.00</td>
+                        <td class="number">104,600.00</td>
+                        <td class="number">0</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000080</strong></td>
+                        <td>하이트진로</td>
+                        <td>2025-11-07</td>
+                        <td class="number">18,730.00</td>
+                        <td class="number">18,780.00</td>
+                        <td class="number">18,600.00</td>
+                        <td class="number">18,640.00</td>
+                        <td class="number">96,949</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000087</strong></td>
+                        <td>하이트진로2우B</td>
+                        <td>2025-11-07</td>
+                        <td class="number">15,450.00</td>
+                        <td class="number">15,500.00</td>
+                        <td class="number">15,170.00</td>
+                        <td class="number">15,220.00</td>
+                        <td class="number">1,947</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000100</strong></td>
+                        <td>유한양행</td>
+                        <td>2025-11-07</td>
+                        <td class="number">113,400.00</td>
+                        <td class="number">118,400.00</td>
+                        <td class="number">112,400.00</td>
+                        <td class="number">115,000.00</td>
+                        <td class="number">350,730</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000105</strong></td>
+                        <td>유한양행우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">100,500.00</td>
+                        <td class="number">102,900.00</td>
+                        <td class="number">99,600.00</td>
+                        <td class="number">100,100.00</td>
+                        <td class="number">9,243</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000120</strong></td>
+                        <td>CJ대한통운</td>
+                        <td>2025-11-07</td>
+                        <td class="number">82,400.00</td>
+                        <td class="number">84,200.00</td>
+                        <td class="number">82,200.00</td>
+                        <td class="number">82,300.00</td>
+                        <td class="number">83,182</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000140</strong></td>
+                        <td>하이트진로홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">9,850.00</td>
+                        <td class="number">9,850.00</td>
+                        <td class="number">9,630.00</td>
+                        <td class="number">9,660.00</td>
+                        <td class="number">11,487</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000145</strong></td>
+                        <td>하이트진로홀딩스우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">11,800.00</td>
+                        <td class="number">11,800.00</td>
+                        <td class="number">11,800.00</td>
+                        <td class="number">11,800.00</td>
+                        <td class="number">0</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000150</strong></td>
+                        <td>두산</td>
+                        <td>2025-11-07</td>
+                        <td class="number">938,000.00</td>
+                        <td class="number">967,000.00</td>
+                        <td class="number">900,000.00</td>
+                        <td class="number">903,000.00</td>
+                        <td class="number">96,787</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000155</strong></td>
+                        <td>두산우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">545,000.00</td>
+                        <td class="number">581,000.00</td>
+                        <td class="number">528,000.00</td>
+                        <td class="number">534,000.00</td>
+                        <td class="number">61,889</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000157</strong></td>
+                        <td>두산2우B</td>
+                        <td>2025-11-07</td>
+                        <td class="number">486,000.00</td>
+                        <td class="number">501,000.00</td>
+                        <td class="number">470,500.00</td>
+                        <td class="number">471,000.00</td>
+                        <td class="number">4,714</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000180</strong></td>
+                        <td>성창기업지주</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,440.00</td>
+                        <td class="number">1,449.00</td>
+                        <td class="number">1,410.00</td>
+                        <td class="number">1,410.00</td>
+                        <td class="number">34,588</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000210</strong></td>
+                        <td>DL</td>
+                        <td>2025-11-07</td>
+                        <td class="number">38,350.00</td>
+                        <td class="number">38,350.00</td>
+                        <td class="number">36,100.00</td>
+                        <td class="number">36,100.00</td>
+                        <td class="number">64,853</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000215</strong></td>
+                        <td>DL우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">24,000.00</td>
+                        <td class="number">25,950.00</td>
+                        <td class="number">24,000.00</td>
+                        <td class="number">24,450.00</td>
+                        <td class="number">14,148</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000220</strong></td>
+                        <td>유유제약</td>
+                        <td>2025-11-07</td>
+                        <td class="number">4,100.00</td>
+                        <td class="number">4,135.00</td>
+                        <td class="number">4,050.00</td>
+                        <td class="number">4,065.00</td>
+                        <td class="number">17,623</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000225</strong></td>
+                        <td>유유제약1우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">4,710.00</td>
+                        <td class="number">4,765.00</td>
+                        <td class="number">4,620.00</td>
+                        <td class="number">4,730.00</td>
+                        <td class="number">3,669</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000227</strong></td>
+                        <td>유유제약2우B</td>
+                        <td>2025-11-07</td>
+                        <td class="number">10,420.00</td>
+                        <td class="number">10,590.00</td>
+                        <td class="number">10,420.00</td>
+                        <td class="number">10,460.00</td>
+                        <td class="number">377</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000230</strong></td>
+                        <td>일동홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">13,440.00</td>
+                        <td class="number">14,220.00</td>
+                        <td class="number">13,050.00</td>
+                        <td class="number">13,090.00</td>
+                        <td class="number">1,221,683</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000240</strong></td>
+                        <td>한국앤컴퍼니</td>
+                        <td>2025-11-07</td>
+                        <td class="number">24,150.00</td>
+                        <td class="number">24,400.00</td>
+                        <td class="number">23,650.00</td>
+                        <td class="number">23,650.00</td>
+                        <td class="number">41,148</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000250</strong></td>
+                        <td>삼천당제약</td>
+                        <td>2025-11-07</td>
+                        <td class="number">220,000.00</td>
+                        <td class="number">228,500.00</td>
+                        <td class="number">217,500.00</td>
+                        <td class="number">218,500.00</td>
+                        <td class="number">91,406</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000270</strong></td>
+                        <td>기아</td>
+                        <td>2025-11-07</td>
+                        <td class="number">110,200.00</td>
+                        <td class="number">111,600.00</td>
+                        <td class="number">109,000.00</td>
+                        <td class="number">109,200.00</td>
+                        <td class="number">326,307</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000300</strong></td>
+                        <td>DH오토넥스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0.00</td>
+                        <td class="number">0.00</td>
+                        <td class="number">0.00</td>
+                        <td class="number">1,984.00</td>
+                        <td class="number">0</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000320</strong></td>
+                        <td>노루홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">24,900.00</td>
+                        <td class="number">24,900.00</td>
+                        <td class="number">22,500.00</td>
+                        <td class="number">22,550.00</td>
+                        <td class="number">59,491</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000325</strong></td>
+                        <td>노루홀딩스우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">31,100.00</td>
+                        <td class="number">31,100.00</td>
+                        <td class="number">29,600.00</td>
+                        <td class="number">29,600.00</td>
+                        <td class="number">272</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000370</strong></td>
+                        <td>한화손해보험</td>
+                        <td>2025-11-07</td>
+                        <td class="number">6,000.00</td>
+                        <td class="number">6,010.00</td>
+                        <td class="number">5,700.00</td>
+                        <td class="number">5,720.00</td>
+                        <td class="number">1,125,677</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000390</strong></td>
+                        <td>삼화페인트</td>
+                        <td>2025-11-07</td>
+                        <td class="number">5,730.00</td>
+                        <td class="number">5,730.00</td>
+                        <td class="number">5,610.00</td>
+                        <td class="number">5,620.00</td>
+                        <td class="number">29,372</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000400</strong></td>
+                        <td>롯데손해보험</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,936.00</td>
+                        <td class="number">1,945.00</td>
+                        <td class="number">1,866.00</td>
+                        <td class="number">1,869.00</td>
+                        <td class="number">301,236</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000440</strong></td>
+                        <td>중앙에너비스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">15,230.00</td>
+                        <td class="number">15,230.00</td>
+                        <td class="number">15,010.00</td>
+                        <td class="number">15,100.00</td>
+                        <td class="number">9,116</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000480</strong></td>
+                        <td>CR홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">4,740.00</td>
+                        <td class="number">4,790.00</td>
+                        <td class="number">4,740.00</td>
+                        <td class="number">4,755.00</td>
+                        <td class="number">17,010</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000490</strong></td>
+                        <td>대동</td>
+                        <td>2025-11-07</td>
+                        <td class="number">9,190.00</td>
+                        <td class="number">9,190.00</td>
+                        <td class="number">8,880.00</td>
+                        <td class="number">8,910.00</td>
+                        <td class="number">124,604</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>0004Y0</strong></td>
+                        <td>디비금융제14호스팩</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,000.00</td>
+                        <td class="number">2,000.00</td>
+                        <td class="number">1,999.00</td>
+                        <td class="number">1,999.00</td>
+                        <td class="number">1,298</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000500</strong></td>
+                        <td>가온전선</td>
+                        <td>2025-11-07</td>
+                        <td class="number">77,900.00</td>
+                        <td class="number">84,300.00</td>
+                        <td class="number">76,500.00</td>
+                        <td class="number">78,200.00</td>
+                        <td class="number">92,389</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000520</strong></td>
+                        <td>삼일제약</td>
+                        <td>2025-11-07</td>
+                        <td class="number">9,390.00</td>
+                        <td class="number">10,060.00</td>
+                        <td class="number">9,260.00</td>
+                        <td class="number">9,810.00</td>
+                        <td class="number">428,884</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000540</strong></td>
+                        <td>흥국화재</td>
+                        <td>2025-11-07</td>
+                        <td class="number">3,790.00</td>
+                        <td class="number">3,810.00</td>
+                        <td class="number">3,665.00</td>
+                        <td class="number">3,700.00</td>
+                        <td class="number">42,837</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000545</strong></td>
+                        <td>흥국화재우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">7,020.00</td>
+                        <td class="number">7,020.00</td>
+                        <td class="number">6,990.00</td>
+                        <td class="number">7,020.00</td>
+                        <td class="number">2,543</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000590</strong></td>
+                        <td>CS홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">72,700.00</td>
+                        <td class="number">72,800.00</td>
+                        <td class="number">71,200.00</td>
+                        <td class="number">71,400.00</td>
+                        <td class="number">449</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000640</strong></td>
+                        <td>동아쏘시오홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">107,600.00</td>
+                        <td class="number">108,700.00</td>
+                        <td class="number">105,100.00</td>
+                        <td class="number">105,100.00</td>
+                        <td class="number">12,256</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000650</strong></td>
+                        <td>천일고속</td>
+                        <td>2025-11-07</td>
+                        <td class="number">37,100.00</td>
+                        <td class="number">37,200.00</td>
+                        <td class="number">37,050.00</td>
+                        <td class="number">37,050.00</td>
+                        <td class="number">32</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000660</strong></td>
+                        <td>SK하이닉스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">577,000.00</td>
+                        <td class="number">599,000.00</td>
+                        <td class="number">571,000.00</td>
+                        <td class="number">574,000.00</td>
+                        <td class="number">3,049,109</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000670</strong></td>
+                        <td>영풍</td>
+                        <td>2025-11-07</td>
+                        <td class="number">51,500.00</td>
+                        <td class="number">51,600.00</td>
+                        <td class="number">49,900.00</td>
+                        <td class="number">50,300.00</td>
+                        <td class="number">25,109</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000680</strong></td>
+                        <td>LS네트웍스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">3,400.00</td>
+                        <td class="number">3,540.00</td>
+                        <td class="number">3,380.00</td>
+                        <td class="number">3,435.00</td>
+                        <td class="number">161,958</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000700</strong></td>
+                        <td>유수홀딩스</td>
+                        <td>2025-11-07</td>
+                        <td class="number">5,500.00</td>
+                        <td class="number">5,530.00</td>
+                        <td class="number">5,470.00</td>
+                        <td class="number">5,480.00</td>
+                        <td class="number">3,490</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000720</strong></td>
+                        <td>현대건설</td>
+                        <td>2025-11-07</td>
+                        <td class="number">64,000.00</td>
+                        <td class="number">64,500.00</td>
+                        <td class="number">61,300.00</td>
+                        <td class="number">62,000.00</td>
+                        <td class="number">1,119,133</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000725</strong></td>
+                        <td>현대건설우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">53,200.00</td>
+                        <td class="number">53,800.00</td>
+                        <td class="number">51,800.00</td>
+                        <td class="number">52,000.00</td>
+                        <td class="number">4,381</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000760</strong></td>
+                        <td>이화산업</td>
+                        <td>2025-11-07</td>
+                        <td class="number">12,300.00</td>
+                        <td class="number">12,300.00</td>
+                        <td class="number">11,820.00</td>
+                        <td class="number">11,910.00</td>
+                        <td class="number">2,016</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000810</strong></td>
+                        <td>삼성화재</td>
+                        <td>2025-11-07</td>
+                        <td class="number">500,000.00</td>
+                        <td class="number">500,000.00</td>
+                        <td class="number">481,500.00</td>
+                        <td class="number">482,500.00</td>
+                        <td class="number">63,974</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000815</strong></td>
+                        <td>삼성화재우</td>
+                        <td>2025-11-07</td>
+                        <td class="number">360,000.00</td>
+                        <td class="number">382,500.00</td>
+                        <td class="number">345,000.00</td>
+                        <td class="number">354,500.00</td>
+                        <td class="number">12,041</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h2>종목별 통계 (상위 100개)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>티커</th>
+                        <th>회사명</th>
+                        <th>시장</th>
+                        <th class="number">데이터 수</th>
+                        <th>시작일</th>
+                        <th>종료일</th>
+                        <th class="number">최저가</th>
+                        <th class="number">최고가</th>
+                        <th class="number">평균가</th>
+                        <th class="number">총 거래량</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td><strong>016090</strong></td>
+                        <td>대현</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,270</td>
+                        <td class="number">4,465</td>
+                        <td class="number">2,466</td>
+                        <td class="number">1,091,228,737</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>029530</strong></td>
+                        <td>신도리코</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">19,000</td>
+                        <td class="number">74,000</td>
+                        <td class="number">41,397</td>
+                        <td class="number">33,262,807</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>075130</strong></td>
+                        <td>플랜티넷</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,515</td>
+                        <td class="number">8,627</td>
+                        <td class="number">3,085</td>
+                        <td class="number">772,578,649</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>189330</strong></td>
+                        <td>씨이랩</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">63,866</td>
+                        <td class="number">10,435</td>
+                        <td class="number">206,273,828</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>039240</strong></td>
+                        <td>경남스틸</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">12,750</td>
+                        <td class="number">2,826</td>
+                        <td class="number">2,440,724,530</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>078520</strong></td>
+                        <td>에이블씨엔씨</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">4,060</td>
+                        <td class="number">33,507</td>
+                        <td class="number">11,973</td>
+                        <td class="number">480,915,907</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>038540</strong></td>
+                        <td>상상인</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">26,844</td>
+                        <td class="number">7,692</td>
+                        <td class="number">1,034,506,989</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>004000</strong></td>
+                        <td>롯데정밀화학</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">23,550</td>
+                        <td class="number">101,500</td>
+                        <td class="number">51,162</td>
+                        <td class="number">266,643,619</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>073640</strong></td>
+                        <td>테라사이언스</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">7,640</td>
+                        <td class="number">1,555</td>
+                        <td class="number">3,141,299,371</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>025540</strong></td>
+                        <td>한국단자</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">19,650</td>
+                        <td class="number">111,000</td>
+                        <td class="number">63,803</td>
+                        <td class="number">78,459,149</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>032560</strong></td>
+                        <td>황금에스티</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,843</td>
+                        <td class="number">13,927</td>
+                        <td class="number">7,037</td>
+                        <td class="number">476,979,843</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>036200</strong></td>
+                        <td>유니셈</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,900</td>
+                        <td class="number">16,050</td>
+                        <td class="number">7,690</td>
+                        <td class="number">1,384,665,129</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>002995</strong></td>
+                        <td>금호건설우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">91,800</td>
+                        <td class="number">24,648</td>
+                        <td class="number">28,122,646</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>078860</strong></td>
+                        <td>엔에스이엔엠</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">2,400</td>
+                        <td class="number">601</td>
+                        <td class="number">14,415,436,392</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>086450</strong></td>
+                        <td>동국제약</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">36,150</td>
+                        <td class="number">16,820</td>
+                        <td class="number">236,869,184</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000680</strong></td>
+                        <td>LS네트웍스</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,105</td>
+                        <td class="number">9,380</td>
+                        <td class="number">3,196</td>
+                        <td class="number">1,310,734,572</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>200780</strong></td>
+                        <td>비씨월드제약</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">3,554</td>
+                        <td class="number">31,604</td>
+                        <td class="number">13,964</td>
+                        <td class="number">447,588,371</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>053050</strong></td>
+                        <td>지에스이</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">965</td>
+                        <td class="number">8,970</td>
+                        <td class="number">2,609</td>
+                        <td class="number">5,655,247,389</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>003800</strong></td>
+                        <td>에이스침대</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">67,400</td>
+                        <td class="number">33,901</td>
+                        <td class="number">7,606,676</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>003650</strong></td>
+                        <td>미창석유</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">43,550</td>
+                        <td class="number">121,000</td>
+                        <td class="number">80,603</td>
+                        <td class="number">4,323,521</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>004090</strong></td>
+                        <td>한국석유</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">30,550</td>
+                        <td class="number">9,509</td>
+                        <td class="number">1,120,808,374</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>052220</strong></td>
+                        <td>iMBC</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,275</td>
+                        <td class="number">7,010</td>
+                        <td class="number">3,477</td>
+                        <td class="number">1,580,082,610</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>002680</strong></td>
+                        <td>한탑</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">5,100</td>
+                        <td class="number">1,761</td>
+                        <td class="number">1,772,919,230</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>058630</strong></td>
+                        <td>엠게임</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,000</td>
+                        <td class="number">15,200</td>
+                        <td class="number">5,855</td>
+                        <td class="number">1,885,135,827</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000215</strong></td>
+                        <td>DL우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">63,200</td>
+                        <td class="number">30,533</td>
+                        <td class="number">23,443,283</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>056090</strong></td>
+                        <td>시지메드텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">13,520</td>
+                        <td class="number">3,742</td>
+                        <td class="number">696,390,540</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>002310</strong></td>
+                        <td>아세아제지</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">12,200</td>
+                        <td class="number">6,818</td>
+                        <td class="number">480,790,510</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>041460</strong></td>
+                        <td>한국전자인증</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,895</td>
+                        <td class="number">12,700</td>
+                        <td class="number">5,904</td>
+                        <td class="number">1,839,684,717</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>218150</strong></td>
+                        <td>미래생명자원</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">12,900</td>
+                        <td class="number">4,281</td>
+                        <td class="number">3,495,273,797</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>015260</strong></td>
+                        <td>에이엔피</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">24,114</td>
+                        <td class="number">4,192</td>
+                        <td class="number">3,057,689,965</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>023910</strong></td>
+                        <td>대한약품</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">20,300</td>
+                        <td class="number">52,700</td>
+                        <td class="number">31,532</td>
+                        <td class="number">66,339,306</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>007280</strong></td>
+                        <td>한국특강</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">6,470</td>
+                        <td class="number">2,135</td>
+                        <td class="number">778,115,629</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>097955</strong></td>
+                        <td>CJ제일제당 우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">68,500</td>
+                        <td class="number">256,000</td>
+                        <td class="number">155,365</td>
+                        <td class="number">11,088,997</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>002870</strong></td>
+                        <td>신풍</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">5,090</td>
+                        <td class="number">1,400</td>
+                        <td class="number">1,606,302,758</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000105</strong></td>
+                        <td>유한양행우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">207,000</td>
+                        <td class="number">51,043</td>
+                        <td class="number">27,004,016</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>067170</strong></td>
+                        <td>오텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,650</td>
+                        <td class="number">19,163</td>
+                        <td class="number">7,763</td>
+                        <td class="number">846,815,491</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>066575</strong></td>
+                        <td>LG전자우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">14,100</td>
+                        <td class="number">94,500</td>
+                        <td class="number">41,002</td>
+                        <td class="number">184,871,458</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>085310</strong></td>
+                        <td>엔케이</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">520</td>
+                        <td class="number">7,220</td>
+                        <td class="number">1,590</td>
+                        <td class="number">3,234,357,978</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>203690</strong></td>
+                        <td>아크솔루션스</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">77,250</td>
+                        <td class="number">18,103</td>
+                        <td class="number">423,212,932</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>126560</strong></td>
+                        <td>현대퓨처넷</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,265</td>
+                        <td class="number">5,850</td>
+                        <td class="number">3,714</td>
+                        <td class="number">1,002,301,665</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>018880</strong></td>
+                        <td>한온시스템</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">20,200</td>
+                        <td class="number">10,074</td>
+                        <td class="number">2,835,199,591</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>040160</strong></td>
+                        <td>누리플렉스</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,265</td>
+                        <td class="number">15,200</td>
+                        <td class="number">7,034</td>
+                        <td class="number">407,787,794</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>037330</strong></td>
+                        <td>인지디스플레</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">995</td>
+                        <td class="number">4,645</td>
+                        <td class="number">2,082</td>
+                        <td class="number">1,565,811,728</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>140910</strong></td>
+                        <td>에이리츠</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">19,201</td>
+                        <td class="number">5,039</td>
+                        <td class="number">65,713,967</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>009410</strong></td>
+                        <td>태영건설</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">28,992</td>
+                        <td class="number">11,070</td>
+                        <td class="number">721,314,219</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>010060</strong></td>
+                        <td>OCI홀딩스</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">148,601</td>
+                        <td class="number">79,382</td>
+                        <td class="number">812,592,921</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>014160</strong></td>
+                        <td>대영포장</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">650</td>
+                        <td class="number">4,015</td>
+                        <td class="number">1,361</td>
+                        <td class="number">9,479,119,877</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>016670</strong></td>
+                        <td>디모아</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">108,542</td>
+                        <td class="number">35,220</td>
+                        <td class="number">125,421,690</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>066410</strong></td>
+                        <td>버킷스튜디오</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">15,326</td>
+                        <td class="number">3,268</td>
+                        <td class="number">5,401,579,261</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>067570</strong></td>
+                        <td>엔브이에이치코리아</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,304</td>
+                        <td class="number">7,425</td>
+                        <td class="number">3,110</td>
+                        <td class="number">1,007,225,993</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>009415</strong></td>
+                        <td>태영건설우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">26,900</td>
+                        <td class="number">5,944</td>
+                        <td class="number">227,913,945</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>035620</strong></td>
+                        <td>바른손이앤에이</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">343</td>
+                        <td class="number">6,440</td>
+                        <td class="number">1,536</td>
+                        <td class="number">4,196,334,074</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>017250</strong></td>
+                        <td>인터엠</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">8,391</td>
+                        <td class="number">2,068</td>
+                        <td class="number">1,190,952,880</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>105330</strong></td>
+                        <td>케이엔더블유</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,868</td>
+                        <td class="number">16,450</td>
+                        <td class="number">6,645</td>
+                        <td class="number">171,265,146</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>200580</strong></td>
+                        <td>메디쎄이</td>
+                        <td><span class="badge badge-konex">KONEX</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">3,545</td>
+                        <td class="number">25,300</td>
+                        <td class="number">10,699</td>
+                        <td class="number">3,264,632</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>005500</strong></td>
+                        <td>삼진제약</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">15,900</td>
+                        <td class="number">64,900</td>
+                        <td class="number">27,949</td>
+                        <td class="number">156,040,137</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>005725</strong></td>
+                        <td>넥센우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">7,440</td>
+                        <td class="number">3,760</td>
+                        <td class="number">27,846,019</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>009290</strong></td>
+                        <td>광동제약</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">3,910</td>
+                        <td class="number">13,350</td>
+                        <td class="number">7,635</td>
+                        <td class="number">940,922,117</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>035420</strong></td>
+                        <td>NAVER</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">465,000</td>
+                        <td class="number">208,566</td>
+                        <td class="number">1,456,066,437</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>002720</strong></td>
+                        <td>국제약품</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,561</td>
+                        <td class="number">15,131</td>
+                        <td class="number">4,958</td>
+                        <td class="number">2,640,344,884</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000890</strong></td>
+                        <td>보해양조</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">394</td>
+                        <td class="number">2,490</td>
+                        <td class="number">956</td>
+                        <td class="number">8,595,636,259</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>204840</strong></td>
+                        <td>지엘팜텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">9,364</td>
+                        <td class="number">2,034</td>
+                        <td class="number">2,667,975,037</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>014915</strong></td>
+                        <td>성문전자우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">43,000</td>
+                        <td class="number">9,490</td>
+                        <td class="number">116,102,738</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>024950</strong></td>
+                        <td>삼천리자전거</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,980</td>
+                        <td class="number">23,250</td>
+                        <td class="number">8,977</td>
+                        <td class="number">430,791,354</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>010120</strong></td>
+                        <td>LS ELECTRIC</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">25,550</td>
+                        <td class="number">510,000</td>
+                        <td class="number">81,675</td>
+                        <td class="number">481,717,023</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>088350</strong></td>
+                        <td>한화생명</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">881</td>
+                        <td class="number">8,200</td>
+                        <td class="number">3,863</td>
+                        <td class="number">6,833,220,014</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>001755</strong></td>
+                        <td>한양증권우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">5,700</td>
+                        <td class="number">40,500</td>
+                        <td class="number">12,650</td>
+                        <td class="number">24,151,385</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>010955</strong></td>
+                        <td>S-Oil우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">25,500</td>
+                        <td class="number">109,500</td>
+                        <td class="number">57,561</td>
+                        <td class="number">34,456,027</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>151860</strong></td>
+                        <td>KG에코솔루션</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">30,600</td>
+                        <td class="number">7,141</td>
+                        <td class="number">2,140,094,231</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>059120</strong></td>
+                        <td>아진엑스텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,393</td>
+                        <td class="number">17,200</td>
+                        <td class="number">7,612</td>
+                        <td class="number">648,071,427</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>095340</strong></td>
+                        <td>ISC</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">5,810</td>
+                        <td class="number">116,900</td>
+                        <td class="number">32,689</td>
+                        <td class="number">574,066,955</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>090435</strong></td>
+                        <td>아모레퍼시픽우</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">29,900</td>
+                        <td class="number">270,000</td>
+                        <td class="number">97,960</td>
+                        <td class="number">63,344,489</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>054210</strong></td>
+                        <td>이랜텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,010</td>
+                        <td class="number">24,850</td>
+                        <td class="number">7,642</td>
+                        <td class="number">1,196,749,427</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>101680</strong></td>
+                        <td>한국정밀기계</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">7,645</td>
+                        <td class="number">3,088</td>
+                        <td class="number">153,934,647</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>047770</strong></td>
+                        <td>코데즈컴바인</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">184,100</td>
+                        <td class="number">5,591</td>
+                        <td class="number">2,799,755,214</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>137950</strong></td>
+                        <td>제이씨케미칼</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">2,530</td>
+                        <td class="number">16,750</td>
+                        <td class="number">5,828</td>
+                        <td class="number">1,132,958,712</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>005830</strong></td>
+                        <td>DB손해보험</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">23,750</td>
+                        <td class="number">148,300</td>
+                        <td class="number">70,882</td>
+                        <td class="number">437,325,301</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>065950</strong></td>
+                        <td>웰크론</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,600</td>
+                        <td class="number">10,700</td>
+                        <td class="number">3,732</td>
+                        <td class="number">4,247,686,491</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>197140</strong></td>
+                        <td>디지캡</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">11,620</td>
+                        <td class="number">3,907</td>
+                        <td class="number">319,134,974</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>082920</strong></td>
+                        <td>비츠로셀</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">34,500</td>
+                        <td class="number">15,470</td>
+                        <td class="number">287,767,431</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>065510</strong></td>
+                        <td>휴비츠</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">4,910</td>
+                        <td class="number">26,400</td>
+                        <td class="number">11,350</td>
+                        <td class="number">264,349,177</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>078340</strong></td>
+                        <td>컴투스</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">32,750</td>
+                        <td class="number">191,500</td>
+                        <td class="number">98,211</td>
+                        <td class="number">326,934,571</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>204620</strong></td>
+                        <td>글로벌텍스프리</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">9,111</td>
+                        <td class="number">3,653</td>
+                        <td class="number">1,773,900,511</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>044450</strong></td>
+                        <td>KSS해운</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">5,300</td>
+                        <td class="number">16,100</td>
+                        <td class="number">8,935</td>
+                        <td class="number">216,123,405</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>050110</strong></td>
+                        <td>캠시스</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">627</td>
+                        <td class="number">4,950</td>
+                        <td class="number">2,165</td>
+                        <td class="number">4,964,399,925</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>028080</strong></td>
+                        <td>휴맥스홀딩스</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,542</td>
+                        <td class="number">10,500</td>
+                        <td class="number">4,520</td>
+                        <td class="number">517,666,131</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>046120</strong></td>
+                        <td>오르비텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,410</td>
+                        <td class="number">11,000</td>
+                        <td class="number">4,532</td>
+                        <td class="number">2,786,521,205</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>018700</strong></td>
+                        <td>바른손</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">738</td>
+                        <td class="number">15,598</td>
+                        <td class="number">3,246</td>
+                        <td class="number">1,964,826,826</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>138360</strong></td>
+                        <td>협진</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">13,000</td>
+                        <td class="number">3,636</td>
+                        <td class="number">901,840,432</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>005720</strong></td>
+                        <td>넥센</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">10,950</td>
+                        <td class="number">5,653</td>
+                        <td class="number">116,217,778</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>066310</strong></td>
+                        <td>큐에스아이</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">3,535</td>
+                        <td class="number">28,650</td>
+                        <td class="number">10,289</td>
+                        <td class="number">403,276,693</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>053950</strong></td>
+                        <td>경남제약</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">10,661</td>
+                        <td class="number">3,946</td>
+                        <td class="number">2,690,290,574</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>020560</strong></td>
+                        <td>아시아나항공</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">0</td>
+                        <td class="number">45,101</td>
+                        <td class="number">18,197</td>
+                        <td class="number">1,317,944,160</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000850</strong></td>
+                        <td>화천기공</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">23,600</td>
+                        <td class="number">64,300</td>
+                        <td class="number">39,809</td>
+                        <td class="number">17,780,662</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>000270</strong></td>
+                        <td>기아</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">21,500</td>
+                        <td class="number">135,000</td>
+                        <td class="number">63,497</td>
+                        <td class="number">3,576,055,344</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>037950</strong></td>
+                        <td>엘컴텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">777</td>
+                        <td class="number">4,105</td>
+                        <td class="number">1,682</td>
+                        <td class="number">9,046,035,229</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>222800</strong></td>
+                        <td>심텍</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">4,614</td>
+                        <td class="number">67,100</td>
+                        <td class="number">19,970</td>
+                        <td class="number">1,228,829,514</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>046310</strong></td>
+                        <td>백금T&A</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">1,400</td>
+                        <td class="number">8,700</td>
+                        <td class="number">3,318</td>
+                        <td class="number">1,228,060,064</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>095610</strong></td>
+                        <td>테스</td>
+                        <td><span class="badge badge-kosdaq">KOSDAQ</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">7,069</td>
+                        <td class="number">51,400</td>
+                        <td class="number">22,858</td>
+                        <td class="number">820,772,057</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>100840</strong></td>
+                        <td>SNT에너지</td>
+                        <td><span class="badge badge-kospi">KOSPI</span></td>
+                        <td class="number">2,449</td>
+                        <td>2015-11-13</td>
+                        <td>2025-11-07</td>
+                        <td class="number">3,672</td>
+                        <td class="number">67,900</td>
+                        <td class="number">9,921</td>
+                        <td class="number">466,479,705</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Generated by kas-tar-defi ETL Pipeline</p>
+            <p>ClickHouse Database: korean_stocks (AWS Singapore)</p>
+            <p>Database Size: ~90 MB | Monthly Cost: ~-6</p>
+        </div>
+    </div>
+</body>
+</html>
